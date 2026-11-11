@@ -1,0 +1,24 @@
+# Runs the app on synthetic data on each push, so a broken change shows up here
+# before anyone installs it.
+name: demo
+on: [push, pull_request]
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.9", "3.12"]
+    env:
+      COLUMNS: "200"
+      LINES: "60"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install .
+      - run: clusterweather --version
+      - name: forecast
+        run: clusterweather --demo --once < /dev/null
+      - name: one cluster's full dashboard
+        run: clusterweather --demo --once --view fir < /dev/null

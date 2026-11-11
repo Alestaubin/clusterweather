@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clusterweather"
+version = "0.1.0"
+description = "Which Slurm cluster should you use today? A live multi-cluster dashboard of GPU queue forecasts, fairshare and lab usage."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [{ name = "Alexandre St-Aubin" }]
+dependencies = ["rich>=12"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Environment :: Console",
+    "Topic :: System :: Clustering",
+]
+
+[project.scripts]
+clusterweather = "clusterweather.app:main"
+
+[project.urls]
+Homepage = "https://github.com/alestaubin/clusterweather"
+
+[tool.setuptools.packages.find]
+where = ["src"]
